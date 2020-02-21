@@ -1,27 +1,90 @@
-# Site
+#### Criar um projeto
+Para criar um novo projeto Angular, digite o seguinte comando no terminal:
+```javascript
+ng new NomeProjeto
+```
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+------------
 
-## Development server
+#### Rodar projeto
+Para executar o projeto, é necessário acessar a pasta do projeto e depois executar.
+```
+ cd NomeProjeto
+ ng serve -o 
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+------------
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Criação de novas páginas
+Deve ser criado um arquivo para conter o HTML, um para CSS e outro para os componentes.
+```
+nome.component.html
+nome.component.css
+nome.component.ts
+```
 
-## Build
+##### Corpo do component.ts
+```javascript
+import { Component } from "@angular/core";
+@Component({
+	  selector: "ifpr-component",
+	  templateUrl: "./ifpr.component.html",
+	  styleUrl: [".ifpr.component.css"]
+})
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+export class IfprComponent{
 
-## Running unit tests
+}
+```
+Em **FROM** dizer de qual biblioteca importar
+Em **@COMPONENT** informar os componentes
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+------------
 
-## Running end-to-end tests
+##### Corpo do component.html
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Título da Página</title>
+  </head>
+  <body>
+    Corpo da página
+  </body>
+</html>
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+------------
 
-## Further help
+#### Fazer a importação do módulo novo
+No arquivo app.module.ts, inserir:
+```javascript
+import { IfprComponent } from './nomedapasta/nome.component'
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  declarations: [
+		NomeComponent
+  ],
+```
+
+------------
+
+
+#### Arquivo app-routing.module.ts
+É utilizado para definir as rotas da aplicação e qual componente irá responder cada rota.
+
+```javascript
+import { IfprComponent } from "./nomedapasta/nome.component";
+
+const routes: Routes = [
+	{path:"nome", component: NomeComponent}
+]
+```
+Neste exemplo foi definida a rota **"nome"** que referencia a pasta e o arquivo **./nomedapasta/nome.component**
+
+Após isso, é necessário referenciar no código HTML
+
+```html
+  <a class="nav-link text-white" routerLink="/nome">TEXTO</a>
+```
